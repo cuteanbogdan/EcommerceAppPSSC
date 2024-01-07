@@ -32,6 +32,16 @@ namespace Ecommerce.Data.Repositories
                 dbContext.SaveChanges();
             }
         }
+
+        public async Task AddBackQuantity(string productId, int quantity)
+        {
+            var product = await dbContext.Products.FindAsync(productId);
+            if (product != null)
+            {
+                product.Stoc = product.Stoc + quantity;
+                dbContext.SaveChanges();
+            }
+        }
     }
 }
 

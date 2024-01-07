@@ -7,10 +7,11 @@ namespace Ecommerce.Data.Repositories
     public class OrderLinesRepository
     {
         private readonly EcommerceAppDbContext dbContext;
-
+        private ProductRepository productRepository;
         public OrderLinesRepository(EcommerceAppDbContext dbContext)
         {
             this.dbContext = dbContext;
+            productRepository = new(new EcommerceAppDbContext());
         }
 
         public async Task<string> GenerateRandomID()
@@ -35,6 +36,18 @@ namespace Ecommerce.Data.Repositories
             orderLine.Price = price;
             orderLine.OrderLineId = await GenerateRandomID();
             await dbContext.OrderLines.AddAsync(orderLine);
+            dbContext.SaveChanges();
+        }
+
+        public async Task RemoveEachLine(string orderId)
+        {
+            List<OrderLineDto> orderLines = dbContext.OrderLines.Where(o => o.OrderId == orderId).ToList();
+            foreach (var orderLine in orderLines)
+            {
+                productRepository.AddBackQuantity(orderLine.ProductId, orderLine.Quantity);
+                dbContext.OrderLines.Remove(orderLine);
+            }
+
             dbContext.SaveChanges();
         }
     }

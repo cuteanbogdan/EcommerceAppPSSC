@@ -38,6 +38,16 @@ namespace Ecommerce.Data.Repositories
             dbContext.SaveChanges();
             return orderHeader.OrderId;
         }
+
+        public async Task removeOrder(string orderId)
+        {
+            OrderHeaderDto orderHeader = await dbContext.OrderHeaders.FindAsync(orderId);
+            if (orderHeader != null)
+            {
+                dbContext.OrderHeaders.Remove(orderHeader);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }
 
