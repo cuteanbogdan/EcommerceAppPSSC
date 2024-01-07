@@ -1,8 +1,8 @@
 ﻿using System;
-using Data.Models;
+using Ecommerce.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data
+namespace Ecommerce.Data
 {
     public class EcommerceAppDbContext : DbContext
     {
@@ -29,7 +29,7 @@ namespace Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=PsscDb;Trusted_Connection=True;TrustServerCertificate=True\r\n");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=PsscDb1;Trusted_Connection=True;TrustServerCertificate=True");
             }
         }
     }

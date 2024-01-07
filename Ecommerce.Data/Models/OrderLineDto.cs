@@ -1,4 +1,4 @@
-﻿namespace Data.Models
+﻿namespace Ecommerce.Data.Models
 {
     public class OrderLineDto
     {

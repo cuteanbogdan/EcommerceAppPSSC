@@ -1,5 +1,4 @@
-﻿using Data;
-using Ecommerce.Data;
+﻿using Ecommerce.Data;
 using Microsoft.EntityFrameworkCore;
 
 string ConnectionString = "Server=localhost;Database=PsscDb;Trusted_Connection=True;TrustServerCertificate=True";
